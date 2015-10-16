@@ -1,0 +1,42 @@
+INTERLIS 2.3;
+
+MODEL ParcelRelational (de) AT "http://www.catais.org/" VERSION "2015-10-15" =
+
+IMPORTS Units;
+IMPORTS Time;
+
+DOMAIN
+  LKoord = COORD 480000.000 .. 840000.000 [INTERLIS.m],
+                 70000.000 .. 300000.000 [INTERLIS.m],
+                 ROTATION 2 -> 1;
+
+ TOPIC Grundstuecke =
+
+   CLASS GrundstueckNummer =
+     EGRID: TEXT*14;
+     Nummer: MANDATORY TEXT*12;
+   END GrundstueckNummer;
+
+   CLASS Liegenschaft =
+      Geometrie: MANDATORY AREA WITH (STRAIGHTS, ARCS) VERTEX LKoord WITHOUT OVERLAPS > 0.002;
+      Flaechenmass: MANDATORY 1 .. 999999999 [Units.m2];
+   END Liegenschaft;
+
+   CLASS SelbstRecht =
+      Geometrie: MANDATORY SURFACE WITH (STRAIGHTS, ARCS) VERTEX LKoord WITHOUT OVERLAPS > 0.002;
+      Flaechenmass: MANDATORY 1 .. 999999999 [Units.m2];
+   END SelbstRecht;
+
+   ASSOCIATION LiegenschaftAssoc =
+     Objekt -- {1} GrundstueckNummer;
+     Liegenschaft -- {0..1} Liegenschaft;
+   END LiegenschaftAssoc;
+
+   ASSOCIATION SelbstRechtAssoc =
+     Objekt -- {1} GrundstueckNummer;
+     SelbstRecht -- {0..1} SelbstRecht;
+   END SelbstRechtAssoc;
+
+  END Grundstuecke;
+
+END ParcelRelational.

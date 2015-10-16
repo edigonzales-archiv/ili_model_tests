@@ -1,0 +1,10 @@
+java -jar ../../../Apps/ili2pg-2.3.0/ili2pg.jar --schemaimport --dbdatabase rosebud2 --dbusr stefan --dbpwd ziegler12 --dbschema ili_parcel_relational --nameByTopic --models ParcelRelational --modeldir .
+
+java -jar ../../../Apps/ili2pg-2.3.0/ili2pg.jar --schemaimport --dbdatabase rosebud2 --dbusr stefan --dbpwd ziegler12 --dbschema ili_parcel_structure --nameByTopic --strokeArcs --models ParcelStructure --modeldir .
+
+
+
+java -jar ../../../Apps/ili2pg-2.3.0/ili2pg.jar --export --dbdatabase rosebud2 --dbusr stefan --dbpwd ziegler12 --dbschema ili_parcel_relational --models ParcelRelational --modeldir . parcel_relational.xtf
+
+
+
